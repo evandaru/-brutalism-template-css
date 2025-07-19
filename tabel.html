@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrutalistCSS - Data Tables</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+    <button class="btn sidebar-open-btn" data-toggle-target="#mainSidebar" data-toggle-class="is-open">
+        MENU
+    </button>
+
+    <div class="layout-wrapper">
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar" id="mainSidebar">
+            <div class="sidebar-header">
+                <h3 class="fs-4">Navigasi</h3>
+            </div>
+            <!-- Pastikan navigasi ini diperbarui di semua file Anda -->
+            <nav class="sidebar-nav">
+                <a href="index.html">Components Overview</a>
+                <a href="card.html">Card / Panel</a>
+                <a href="button.html">Buttons</a>
+                <a href="form-elements.html">Form Elements</a>
+                <a href="dialog.html">Dialog / Modal</a>
+                <a href="progress-bar.html">Progress Bar</a>
+                <a href="tabel.html" class="active">Data Tables</a> 
+                <a href="whats-new.html">What's New</a>
+            </nav>
+            <div class="mt-auto">
+                <div class="d-flex align-items-center">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="darkModeToggle" />
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <span class="ml-2">Mode Malam</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ===== KONTEN UTAMA ===== -->
+        <main class="main-content">
+            <div class="container my-5">
+                <header class="mb-5">
+                    <h1 class="fs-2">Data Tables Showcase</h1>
+                    <p>Berbagai variasi untuk menampilkan data tabular secara efektif.</p>
+                </header>
+
+                <!-- 1. Tabel Dasar -->
+                <section class="panel mb-5" aria-labelledby="table-basic-title">
+                    <div class="panel-header"><h4 class="panel-title" id="table-basic-title">1. Tabel Dasar</h4></div>
+                    <div class="panel-body">
+                        <p>Struktur dasar menggunakan kelas <code>.data-table</code>.</p>
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>ID</th><th>Nama Produk</th><th>Stok</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>001</td><td>CPU Model X</td><td>150</td></tr>
+                                <tr><td>002</td><td>RAM 16GB Kit</td><td>230</td></tr>
+                                <tr><td>003</td><td>SSD 1TB NVMe</td><td>85</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 2. Variasi Gaya Tabel -->
+                <section class="panel mb-5" aria-labelledby="table-style-title">
+                    <div class="panel-header"><h4 class="panel-title" id="table-style-title">2. Variasi Gaya</h4></div>
+                    <div class="panel-body">
+                        <p>Gunakan kelas modifier untuk mengubah tampilan. Coba <code>.data-table--striped</code> dan <code>.data-table--hover</code>.</p>
+                        <table class="data-table data-table--striped data-table--hover">
+                             <thead>
+                                <tr><th>File</th><th>Ukuran</th><th>Tanggal Modifikasi</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>config.sys</td><td>1 KB</td><td>1995-08-24</td></tr>
+                                <tr><td>kernel.dll</td><td>1.2 MB</td><td>2023-10-26</td></tr>
+                                <tr><td>user_data.bin</td><td>512 KB</td><td>2023-11-15</td></tr>
+                                <tr><td>readme.txt</td><td>2 KB</td><td>1998-04-01</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 3. Tabel Responsif -->
+                 <section class="panel mb-5" aria-labelledby="table-responsive-title">
+                    <div class="panel-header"><h4 class="panel-title" id="table-responsive-title">3. Tabel Responsif</h4></div>
+                    <div class="panel-body">
+                        <p>Bungkus tabel dengan <code><div class="table-responsive"></code> agar dapat di-scroll secara horizontal pada layar kecil.</p>
+                        <div class="table-responsive">
+                             <table class="data-table">
+                                <thead>
+                                    <tr><th>Nama</th><th>Email</th><th>Jabatan</th><th>Departemen</th><th>Lokasi Kantor</th><th>Tanggal Bergabung</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>John Doe</td><td>john.doe@example.com</td><td>Developer</td><td>Teknologi</td><td>Jakarta</td><td>2022-01-10</td></tr>
+                                    <tr><td>Jane Smith</td><td>jane.smith@example.com</td><td>Designer</td><td>Kreatif</td><td>Bandung</td><td>2021-05-20</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. "Datatable" Interaktif -->
+                <section class="panel" id="interactive-datatable-panel" aria-labelledby="table-interactive-title">
+                    <div class="panel-header">
+                        <h4 class="panel-title" id="table-interactive-title">4. Datatable Interaktif (Cari & Urutkan)</h4>
+                    </div>
+                    <div class="panel-body">
+                         <div class="form-group">
+                             <label for="table-search" class="form-label">Cari Data:</label>
+                             <input type="text" id="table-search" class="form-control" placeholder="Ketik untuk memfilter data...">
+                         </div>
+                         <div class="table-responsive mt-3">
+                             <table class="data-table data-table--hover">
+                                 <thead>
+                                     <tr>
+                                         <th class="sortable-header" data-sort-dir="asc">User ID</th>
+                                         <th class="sortable-header" data-sort-dir="asc">Nama</th>
+                                         <th class="sortable-header" data-sort-dir="asc">Status</th>
+                                         <th class="sortable-header" data-sort-dir="asc">Poin</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody id="interactive-tbody">
+                                     <tr><td>USR-007</td><td>Budi Santoso</td><td>Aktif</td><td>1500</td></tr>
+                                     <tr><td>USR-002</td><td>Citra Lestari</td><td>Aktif</td><td>850</td></tr>
+                                     <tr><td>USR-015</td><td>Agus Wijaya</td><td>Tidak Aktif</td><td>250</td></tr>
+                                     <tr><td>USR-001</td><td>Dewi Anggraini</td><td>Aktif</td><td>2300</td></tr>
+                                     <tr><td>USR-005</td><td>Eka Putra</td><td>Aktif</td><td>1200</td></tr>
+                                     <tr><td>USR-021</td><td>Fajar Nugroho</td><td>Review</td><td>50</td></tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal dan script.js tetap sama, tidak perlu diubah -->
+    <div class="modal" id="demoModal">...</div>
+    <script src="assets/script.js"></script>
+
+    <!-- [PENTING] Tambahkan script ini khusus untuk halaman tabel.html -->
+    <script>
+       
+    </script>
+</body>
+</html>

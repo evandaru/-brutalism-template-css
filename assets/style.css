@@ -1,0 +1,1530 @@
+/* ==========================================================================
+   BrutalistCSS v1.0
+   Framework CSS ringan, umum, dan tanpa basa-basi dengan gaya brutalist.
+   Didesain untuk kesederhanaan, kecepatan, dan karakter yang kuat.
+   ========================================================================== */
+
+/* ---------------------------------- */
+/* #SECTION 1: Variabel & Tema (Root) */
+/* ---------------------------------- */
+
+:root {
+  /* -- Mode Terang (Default) -- */
+  --bg-color: #ffffff;
+  --surface-bg: #ffffff; /* Latar belakang untuk panel, modal, dll. */
+  --text-color: #000000;
+  --border-color: #000000;
+  --shadow-color: #000000;
+  --accent-bg: #eae3d4;
+  --disabled-opacity: 0.6;
+
+  --font-main: "VT323", monospace;
+  --border-width: 2px;
+  --shadow-offset: 5px;
+
+  /* Warna untuk Alert */
+  --color-info: #007bff;
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+
+  --color-primary: #0d6efd;
+  --color-secondary: #6c757d;
+  /* Warna success, danger, warning, info sudah ada, kita akan pakai itu */
+  --color-light: #6c757d; /* Di background terang, link "light" harus tetap gelap agar terbaca */
+  --color-dark: #000000;
+  --color-emphasis: #000000; /* Dibuat lebih menonjol, bisa dibuat bold juga */
+}
+
+[data-theme="dark"] {
+  --bg-color: #1a202c;
+  --surface-bg: #2d3748;
+  --text-color: #fdf6e3;
+  --border-color: #fdf6e3;
+  --shadow-color: #cacaca;
+  --accent-bg: #4a5568;
+  --disabled-opacity: 0.5;
+  --bg-grid-color: rgba(255, 255, 255, 0.05); /* Warna grid lebih terang */
+  --select-arrow-color: "%23FDF6E3"; /* Warna panah (URL encoded dari #FDF6E3) */
+  --color-primary: #6ea8fe;
+  --color-secondary: #adb5bd;
+  --color-light: #f8f9fa; /* Di background gelap, link "light" harus terang */
+  --color-dark: #ced4da; /* Link "dark" juga harus terang */
+  --color-emphasis: #ffffff; /* Lebih menonjol dari text-color biasa */
+
+  /* Kita juga perlu mencerahkan warna alert yang ada untuk link */
+  --color-success: #75b798;
+  --color-danger: #ff758f;
+  --color-warning: #ffd670;
+  --color-info: #63d4ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* -- Mode Gelap -- */
+    --bg-color: #1a202c;
+    --surface-bg: #2d3748;
+    --text-color: #fdf6e3;
+    --border-color: #fdf6e3;
+    --shadow-color: #1a202c;
+    --accent-bg: #4a5568;
+    --disabled-opacity: 0.5;
+  }
+}
+
+/* ---------------------------------- */
+/* #SECTION 2: Reset & Gaya Dasar    */
+/* ---------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  /* Pola grid retro di background */
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-attachment: fixed;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.5;
+  transition: background-color 0.2s, color 0.2s;
+  background-image: linear-gradient(
+      to right,
+      var(--bg-grid-color, rgba(0, 0, 0, 0.1)) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      var(--bg-grid-color, rgba(0, 0, 0, 0.1)) 1px,
+      transparent 1px
+    );
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+p {
+  margin: 0 0 1rem 0;
+}
+a {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+a:hover {
+  opacity: 0.8;
+}
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+code {
+  background-color: var(--accent-bg);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+pre {
+  background-color: var(--accent-bg);
+  border: var(--border-width) solid var(--border-color);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+/* ---------------------------------- */
+/* #SECTION 3: Layout (Grid & Container)  */
+/* ---------------------------------- */
+
+.container {
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+.row {
+  display: grid;
+  /* Membuat kolom responsif otomatis. 
+     Setiap kolom minimal 320px, jika ada ruang lebih, akan membesar. 
+     Jika tidak muat, akan pindah ke baris baru. */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem; /* Mengatur jarak antar panel secara konsisten */
+}
+.col,
+[class*="col-"] {
+  width: 100%;
+  padding: 0 15px;
+}
+
+.col {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+.col-1 {
+  flex: 0 0 8.33%;
+  max-width: 8.33%;
+}
+.col-2 {
+  flex: 0 0 16.66%;
+  max-width: 16.66%;
+}
+.col-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+.col-4 {
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+}
+.col-5 {
+  flex: 0 0 41.66%;
+  max-width: 41.66%;
+}
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+.col-7 {
+  flex: 0 0 58.33%;
+  max-width: 58.33%;
+}
+.col-8 {
+  flex: 0 0 66.66%;
+  max-width: 66.66%;
+}
+.col-9 {
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+.col-10 {
+  flex: 0 0 83.33%;
+  max-width: 83.33%;
+}
+.col-11 {
+  flex: 0 0 91.66%;
+  max-width: 91.66%;
+}
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* ---------------------------------- */
+/* #SECTION 4: Komponen              */
+/* ---------------------------------- */
+
+/* --- Panel --- */
+.panel {
+  background-color: var(--surface-bg);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow-color);
+  transition: all 0.1s linear;
+  margin: 40px 20px;
+}
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+.panel-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.panel-body {
+  padding: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ---------------------------------- */
+/* #SECTION 4: Komponen              */
+/* ---------------------------------- */
+
+/* --- Panel --- */
+.panel {
+  background-color: var(--surface-bg);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow-color);
+  transition: all 0.1s linear;
+  display: flex; /* Membantu footer menempel di bawah jika panel punya tinggi sama */
+  flex-direction: column;
+  /* [DIHAPUS] margin: 40px 20px; Jarak sekarang diatur oleh .row { gap: ... } */
+}
+
+.panel-header {
+  padding: 8px 12px;
+  border-bottom: var(--border-width) solid var(--border-color);
+  flex-shrink: 0; /* Mencegah header menyusut */
+}
+
+.panel-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0; /* Menghapus margin bawaan dari h4 */
+}
+
+.panel-body {
+  padding: 20px;
+  flex-grow: 1; /* Memastikan body mengisi ruang yang tersedia */
+  /* [DIHAPUS] Aturan display: flex yang terlalu spesifik di sini */
+}
+
+.panel-body p:last-child {
+  margin-bottom: 0; /* Menghilangkan margin bawah pada paragraf terakhir di body */
+}
+
+.panel-footer {
+  padding: 8px 12px;
+  border-top: var(--border-width) solid var(--border-color);
+  background-color: var(--accent-bg);
+  flex-shrink: 0; /* Mencegah footer menyusut */
+}
+
+/* [BARU] Menggantikan inline style pada gambar */
+.panel-img {
+  width: 100%;
+  display: block; /* Menghilangkan spasi ekstra di bawah gambar */
+  height: auto;
+}
+
+/* --- Tombol (Button) --- */
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem; /* Jarak antar tombol */
+}
+
+.btn {
+  /* Variabel lokal untuk tombol, mudah diubah oleh modifier */
+  --btn-color: var(--text-color);
+  --btn-bg: transparent;
+  --btn-hover-bg: var(--accent-bg);
+
+  font-family: var(--font-main);
+  font-size: 1rem;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+
+  /* Menggunakan variabel lokal */
+  color: var(--btn-color);
+  background-color: var(--btn-bg);
+  border: var(--border-width) solid var(--btn-color);
+
+  transition: all 0.1s linear;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background-color: var(--btn-hover-bg);
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  outline: none; /* Ganti outline browser dengan shadow */
+}
+
+.btn:active {
+  background-color: var(--btn-color);
+  color: var(--surface-bg);
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn--icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* Jarak antara ikon dan teks */
+}
+.btn--icon svg {
+  flex-shrink: 0; /* Mencegah ikon menyusut */
+}
+
+/* 1. Modifier Warna Kontekstual */
+.btn--primary {
+  --btn-color: var(--color-primary);
+}
+.btn--success {
+  --btn-color: var(--color-success);
+}
+.btn--danger {
+  --btn-color: var(--color-danger);
+}
+.btn--warning {
+  --btn-color: var(--color-warning);
+}
+
+/* Saat di-hover, tombol berwarna menggunakan warnanya sendiri sebagai background */
+.btn--primary:hover {
+  --btn-hover-bg: var(--color-primary);
+  color: var(--surface-bg);
+}
+.btn--success:hover {
+  --btn-hover-bg: var(--color-success);
+  color: var(--surface-bg);
+}
+.btn--danger:hover {
+  --btn-hover-bg: var(--color-danger);
+  color: var(--surface-bg);
+}
+.btn--warning:hover {
+  --btn-hover-bg: var(--color-warning);
+  color: var(--text-color);
+}
+
+/* 2. Modifier Terisi (Filled) */
+.btn--filled {
+  /* Mengganti nilai variabel lokal */
+  --btn-bg: var(--btn-color);
+  color: var(--surface-bg);
+}
+
+/* Hover untuk tombol filled: membalik warna */
+.btn--filled:hover,
+.btn--filled:focus-visible {
+  --btn-hover-bg: var(--surface-bg);
+  color: var(--btn-color);
+  border-color: var(--btn-color);
+}
+
+/* --- Tombol Close Modal (Spesifik) --- */
+.btn-close {
+  background: none;
+  border: none;
+  font-family: var(--font-main);
+  font-size: 1.75rem; /* Dibuat lebih besar agar mudah diklik */
+  line-height: 1;
+  padding: 0 0.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+  opacity: 0.7;
+  transition: opacity 0.1s linear;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+/* --- Form --- */
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.form-control,
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  color: var(--text-color);
+  background-color: transparent;
+  border: var(--border-width) solid var(--border-color);
+  outline: none;
+  appearance: none;
+}
+.form-control:focus {
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px 12px;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='var(--select-arrow-color, %23000000)' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-control,
+.form-select,
+.form-range {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  color: var(--text-color);
+  background-color: transparent;
+  border: var(--border-width) solid var(--border-color);
+  outline: none;
+  appearance: none;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary); /* Ubah border color saat fokus */
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* State Disabled */
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: var(--accent-bg);
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+/* [BARU] State Validasi */
+.form-control.is-valid {
+  border-color: var(--color-success);
+}
+.form-control.is-valid:focus {
+  box-shadow: 0 0 0 3px rgba(var(--color-success), 0.25);
+}
+.form-control.is-invalid {
+  border-color: var(--color-danger);
+}
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(var(--color-danger), 0.25);
+}
+
+/* [BARU] Teks Bantuan Validasi */
+.form-text-success {
+  color: var(--color-success);
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+}
+.form-text-danger {
+  color: var(--color-danger);
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+}
+
+/* [BARU] Input Group */
+.input-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+.input-group > .form-control {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+.input-group > .form-control:not(:first-child) {
+  margin-left: calc(var(--border-width) * -1);
+}
+.input-group > *:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.input-group > *:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: var(--accent-bg);
+  border: var(--border-width) solid var(--border-color);
+}
+
+/* [BARU] Custom File Input */
+.form-control-file {
+  position: relative;
+  width: 100%;
+}
+.form-control-file-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+.form-control-file-label {
+  display: block;
+  padding: 10px 12px;
+  font-family: var(--font-main);
+  color: var(--text-color);
+  background-color: transparent;
+  border: var(--border-width) solid var(--border-color);
+  cursor: pointer;
+  z-index: 1;
+}
+.form-control-file-input:focus + .form-control-file-label {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+/* [BARU] Custom Range Slider */
+.form-range {
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+.form-range:focus {
+  box-shadow: none; /* Tidak perlu shadow pada range */
+}
+.form-range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  background: var(--accent-bg);
+  border: var(--border-width) solid var(--border-color);
+}
+.form-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 12px;
+  background: var(--text-color);
+  border: var(--border-width) solid var(--border-color);
+  cursor: pointer;
+  margin-top: -10px; /* Posisi thumb di tengah track */
+}
+/* Style untuk Firefox */
+.form-range::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  background: var(--accent-bg);
+  border: var(--border-width) solid var(--border-color);
+}
+.form-range::-moz-range-thumb {
+  height: 20px;
+  width: 10px;
+  background: var(--text-color);
+  border: var(--border-width) solid var(--border-color);
+  cursor: pointer;
+}
+
+/* --- Toggle Switch (dengan Variabel untuk ukuran) --- */
+.toggle-switch {
+  /* Variabel lokal untuk ukuran */
+  --switch-width: 50px;
+  --switch-height: 26px;
+  --switch-ball-size: 18px;
+  --switch-ball-offset: 2px;
+  --switch-translate: 24px;
+
+  position: relative;
+  display: inline-block;
+  width: var(--switch-width);
+  height: var(--switch-height);
+}
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--accent-bg);
+  border: var(--border-width) solid var(--border-color);
+  transition: 0.2s;
+}
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: var(--switch-ball-size);
+  width: var(--switch-ball-size);
+  left: var(--switch-ball-offset);
+  bottom: var(--switch-ball-offset);
+  background-color: var(--text-color);
+  transition: 0.2s;
+}
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--text-color);
+}
+.toggle-switch input:checked + .toggle-slider:before {
+  background-color: var(--surface-bg);
+  transform: translateX(var(--switch-translate));
+}
+
+/* [BARU] Modifier ukuran Toggle */
+.toggle-switch--sm {
+  --switch-width: 40px;
+  --switch-height: 22px;
+  --switch-ball-size: 14px;
+  --switch-translate: 18px;
+}
+.toggle-switch--lg {
+  --switch-width: 60px;
+  --switch-height: 32px;
+  --switch-ball-size: 24px;
+  --switch-translate: 28px;
+}
+
+/* [BARU] Utilitas Pembatas Form */
+.form-divider {
+  border: none;
+  border-top: var(--border-width) dotted var(--border-color);
+  margin: 2rem 0;
+}
+
+/* --- Checkbox & Radio --- */
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.form-check-input {
+  opacity: 0;
+  position: absolute;
+}
+.form-check-label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+.form-check-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: var(--border-width) solid var(--border-color);
+  background-color: var(--surface-bg);
+}
+.form-check-input:checked + .form-check-label::after {
+  content: "X";
+  font-weight: bold;
+  position: absolute;
+  left: 4px; /* Sesuaikan posisi X */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  line-height: 1;
+}
+/* Radio button style */
+.form-check-input[type="radio"] + .form-check-label::before {
+  border-radius: 50%;
+}
+.form-check-input[type="radio"]:checked + .form-check-label::after {
+  content: "";
+  background-color: var(--text-color);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  left: 4px;
+}
+
+/* --- List Group --- */
+.list-group {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  background-color: transparent;
+  border-bottom: var(--border-width) dotted var(--border-color);
+}
+.list-group-item:last-child {
+  border-bottom: none;
+}
+.list-group-item-action {
+  cursor: pointer;
+}
+.list-group-item-action:hover {
+  background-color: var(--accent-bg);
+}
+.list-group-item.active {
+  background-color: var(--text-color);
+  color: var(--surface-bg);
+}
+.list-group-item.disabled,
+.list-group-item:disabled {
+  color: var(--text-color);
+  opacity: var(--disabled-opacity);
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+/* --- Alert --- */
+.alert {
+  background-color: var(--bg-color);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow-color);
+}
+.alert-info {
+  border-color: var(--color-info);
+}
+.alert-success {
+  border-color: var(--color-success);
+}
+.alert-warning {
+  border-color: var(--color-warning);
+}
+.alert-danger {
+  border-color: var(--color-danger);
+}
+
+/* --- Modal --- */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center; /* Default: center vertikal */
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem; /* Padding untuk mencegah modal menempel di tepi layar kecil */
+  transition: opacity 0.1s linear, visibility 0s linear;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.modal.is-open {
+  transition: opacity 0.15s linear, visibility 0s linear;
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-dialog {
+  max-width: 600px; /* Lebar default */
+  width: 100%;
+  max-height: 90vh; /* Mencegah modal lebih tinggi dari viewport */
+  display: flex; /* Membantu panel di dalamnya mengisi tinggi */
+  flex-direction: column;
+}
+
+.modal.is-open .modal-dialog {
+  animation: modal-pop-in 0.2s linear forwards;
+}
+
+@keyframes modal-pop-in {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* [BARU] Modifier ukuran dialog */
+.modal-dialog--sm {
+  max-width: 400px;
+}
+.modal-dialog--lg {
+  max-width: 800px;
+}
+
+/* [BARU] Modifier untuk body modal yang bisa di-scroll */
+.modal-body--scrollable {
+  max-height: 60vh; /* Batasi tinggi body */
+  overflow-y: auto;
+  /* Tambahkan sedikit padding untuk scrollbar agar tidak menempel konten */
+  padding-right: 10px;
+}
+.modal-dialog > .panel {
+  width: 100%; /* Pastikan panel mengisi dialog */
+  display: flex; /* Untuk membuat body scrollable bekerja dengan baik */
+  flex-direction: column;
+}
+
+/* [BARU] Modifier Posisi Modal dari Atas */
+.modal--from-top {
+  align-items: flex-start; /* Ganti centering vertikal ke atas */
+  background-color: transparent; /* Overlay tidak diperlukan untuk gaya notifikasi */
+  pointer-events: none; /* Izinkan klik menembus background transparan */
+}
+.modal--from-top .modal-dialog {
+  pointer-events: auto; /* Tapi dialognya sendiri harus bisa diklik */
+  margin-top: 1rem;
+}
+.modal.is-open.modal--from-top .modal-dialog {
+  animation: modal-slide-down 0.3s ease-out forwards;
+}
+
+@keyframes modal-slide-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- Data Table --- */
+/* ================================ */
+/* #SECTION 4.5: Komponen - Tabel   */
+/* ================================ */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: var(--border-width) solid var(--border-color);
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px 12px;
+  border-bottom: var(--border-width) solid var(--border-color);
+  text-align: left;
+}
+
+.data-table thead th {
+  font-weight: bold;
+  background-color: var(--accent-bg);
+  border-bottom-width: calc(
+    var(--border-width) * 2
+  ); /* Header border lebih tebal */
+}
+
+/* Modifier: Baris Bergaris */
+.data-table--striped tbody tr:nth-child(odd) {
+  background-color: var(--accent-bg);
+}
+
+/* Modifier: Efek Hover */
+.data-table--hover tbody tr:hover {
+  background-color: var(--color-warning); /* Warna yang mencolok untuk hover */
+  color: var(--text-color);
+}
+[data-theme="dark"] .data-table--hover tbody tr:hover {
+  color: #000;
+}
+
+/* Modifier: Tabel Rapat */
+.data-table--compact th,
+.data-table--compact td {
+  padding: 6px 8px;
+}
+
+/* Wrapper Responsif */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Scroll lebih mulus di iOS */
+  border: var(--border-width) solid var(--border-color); /* Beri border pada wrapper */
+}
+.table-responsive > .data-table {
+  border: none; /* Hapus border tabel jika di dalam wrapper */
+}
+
+/* [BARU] Styling untuk Header Interaktif */
+.sortable-header {
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+.sortable-header::after {
+  content: "↕";
+  position: absolute;
+  right: 10px;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+.sortable-header:hover::after {
+  opacity: 1;
+}
+.sortable-header.sorted-asc::after,
+.sortable-header.sorted-desc::after {
+  opacity: 1;
+}
+.sortable-header.sorted-asc::after {
+  content: "↑";
+}
+.sortable-header.sorted-desc::after {
+  content: "↓";
+}
+
+/* ---------------------------------- */
+/* #SECTION 5: Kelas Utilitas        */
+/* ---------------------------------- */
+
+/* -- Display & Flex -- */
+.d-flex {
+  display: flex important;
+}
+.d-grid {
+  display: grid !important;
+}
+.d-block {
+  display: block !important;
+}
+.d-none {
+  display: none !important;
+}
+.justify-content-center {
+  justify-content: center !important;
+}
+.justify-content-between {
+  justify-content: space-between !important;
+}
+.align-items-center {
+  align-items: center !important;
+}
+
+/* -- Text -- */
+.text-center {
+  text-align: center !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.text-muted {
+  opacity: var(--disabled-opacity);
+}
+.fw-bold {
+  font-weight: bold !important;
+}
+
+/* -- Ukuran Font -- */
+.fs-1 {
+  font-size: 4rem !important;
+}
+.fs-2 {
+  font-size: 2.5rem !important;
+}
+.fs-3 {
+  font-size: 2rem !important;
+}
+.fs-4 {
+  font-size: 1.5rem !important;
+}
+.fs-5 {
+  font-size: 1.25rem !important;
+}
+.fs-6 {
+  font-size: 1rem !important;
+}
+
+/* -- Spacing (Margin & Padding) -- */
+.m-0 {
+  margin: 0 !important;
+}
+.p-0 {
+  padding: 0 !important;
+}
+.m-1 {
+  margin: 0.25rem !important;
+}
+.p-1 {
+  padding: 0.25rem !important;
+}
+.m-2 {
+  margin: 0.5rem !important;
+}
+.p-2 {
+  padding: 0.5rem !important;
+}
+.m-3 {
+  margin: 1rem !important;
+}
+.p-3 {
+  padding: 1rem !important;
+}
+.m-4 {
+  margin: 1.5rem !important;
+}
+.p-4 {
+  padding: 1.5rem !important;
+}
+.m-5 {
+  margin: 3rem !important;
+}
+.p-5 {
+  padding: 3rem !important;
+}
+.mt-auto {
+  margin-top: auto !important;
+}
+.mb-auto {
+  margin-bottom: auto !important;
+}
+.mx-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+.my-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+
+/* -- Efek Tambahan -- */
+.text-glitch-hover:hover {
+  animation: text-glitch 0.2s infinite;
+}
+@keyframes text-glitch {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-1px, 1px);
+  }
+  50% {
+    transform: translate(1px, -1px);
+  }
+  75% {
+    transform: translate(1px, 1px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.cursor-blink::after {
+  content: "_";
+  font-weight: bold;
+  animation: blink 0.7s infinite;
+  margin-left: 2px;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ... (kode komponen lain) ... */
+
+/* --- Progress Bar --- */
+.progress-bar {
+  --progress-bar-height: 25px;
+  --progress-bar-bg: var(--text-color);
+
+  width: 100%;
+  height: var(--progress-bar-height);
+  background-color: var(--accent-bg);
+  border: var(--border-width) solid var(--border-color);
+  padding: 2px;
+  overflow: hidden; /* Penting untuk indeterminate bar */
+}
+
+.progress-bar-inner {
+  height: 100%;
+  background-color: var(--progress-bar-bg);
+  color: var(--surface-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  white-space: nowrap; /* Mencegah teks label turun baris */
+  transition: width 0.6s ease;
+}
+
+[data-theme="dark"] .progress-bar-inner {
+  color: var(--bg-color);
+}
+
+/* Modifier Warna */
+.progress-bar--success {
+  --progress-bar-bg: var(--color-success);
+}
+.progress-bar--warning {
+  --progress-bar-bg: var(--color-warning);
+}
+.progress-bar--danger {
+  --progress-bar-bg: var(--color-danger);
+}
+
+/* [BARU] Modifier Ukuran */
+.progress-bar--sm {
+  --progress-bar-height: 12px;
+}
+.progress-bar--sm .progress-bar-inner {
+  font-size: 0; /* Sembunyikan label pada bar kecil */
+}
+.progress-bar--lg {
+  --progress-bar-height: 35px;
+}
+.progress-bar--lg .progress-bar-inner {
+  font-size: 1rem;
+}
+
+/* [BARU] Modifier Striped */
+.progress-bar--striped .progress-bar-inner {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+}
+
+/* [BARU] Modifier Animasi */
+.progress-bar--animated .progress-bar-inner {
+  animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 1rem 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* [BARU] Modifier Indeterminate */
+.progress-bar--indeterminate .progress-bar-inner {
+  width: 50% !important; /* Lebar tetap, tapi posisinya dianimasikan */
+  animation: progress-indeterminate 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(200%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* --- Toggle Switch --- */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--accent-bg);
+  border: var(--border-width) solid var(--border-color);
+  transition: 0.2s;
+}
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--text-color);
+  transition: 0.2s;
+}
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--text-color);
+}
+.toggle-switch input:checked + .toggle-slider:before {
+  background-color: var(--surface-bg);
+  transform: translateX(24px);
+}
+
+/* ... (sisa kode CSS) ... */
+.layout-wrapper {
+  display: flex;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--surface-bg);
+  border-right: var(--border-width) solid var(--border-color);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: var(--border-width) dotted var(--border-color);
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  margin-bottom: 5px;
+  border: var(--border-width) solid transparent;
+}
+
+.sidebar-nav a:hover {
+  background-color: var(--accent-bg);
+}
+
+.sidebar-nav a.active {
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 3px 3px 0 var(--shadow-color);
+}
+
+.main-content {
+  margin-left: 260px; /* Lebar sidebar */
+  width: calc(100% - 260px);
+  padding: 20px;
+}
+
+/* Tombol untuk membuka sidebar di mobile */
+.sidebar-open-btn {
+  background-color: var(--bg-color);
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 101; /* Di atas sidebar */
+  display: none; /* Hanya muncul di mobile */
+}
+
+/* Style Responsif untuk Sidebar */
+@media (max-width: 992px) {
+  .sidebar {
+    transform: translateX(-100%); /* Sembunyikan sidebar */
+  }
+
+  .sidebar.is-open {
+    transform: translateX(0); /* Tampilkan sidebar */
+    box-shadow: var(--shadow-offset) 0 0 var(--shadow-color);
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sidebar-open-btn {
+    display: block;
+  }
+}
+
+.disabled,
+[disabled] {
+  opacity: var(--disabled-opacity) !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+[class*="link-"] {
+  text-decoration: none; /* Hapus garis bawah secara default */
+  transition: all 0.1s linear;
+}
+
+/* 
+  Saat di-hover atau di-fokus (dengan keyboard), kita munculkan kembali garis bawah.
+  Gaya 'dotted' memberikan sentuhan retro/brutalist yang khas.
+*/
+[class*="link-"]:hover,
+[class*="link-"]:focus-visible {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px; /* Memberi sedikit ruang antara teks dan garis bawah */
+}
+
+.link-primary {
+  color: var(--color-primary);
+}
+.link-secondary {
+  color: var(--color-secondary);
+}
+.link-success {
+  color: var(--color-success);
+}
+.link-danger {
+  color: var(--color-danger);
+}
+.link-warning {
+  color: var(--color-warning);
+}
+.link-info {
+  color: var(--color-info);
+}
+.link-light {
+  color: var(--color-light);
+}
+.link-dark {
+  color: var(--color-dark);
+}
+
+/* Link emphasis dibuat lebih menonjol dengan font tebal */
+.link-body-emphasis {
+  color: var(--color-emphasis);
+  font-weight: bold;
+}
+
+/* style.css */
+
+.panel-body {
+  padding: 20px;
+}
+
+/* -- Tambahkan ini -- */
+.panel-footer {
+  padding: 8px 12px;
+  border-top: var(--border-width) solid var(--border-color);
+  background-color: var(--accent-bg);
+}
+
+.main-header {
+  text-align: center;
+  border: var(--border-width) solid var(--border-color);
+  padding: 2rem 1rem;
+  background-color: var(--surface-bg);
+  margin-bottom: 3rem !important; /* Overwrite mb-5 */
+}
+.main-header p {
+  margin-bottom: 0.5rem;
+}
+
+/* --- Grid Navigasi (index.html) --- */
+.nav-grid {
+  display: grid;
+  /* Membuat grid responsif: minimal 280px, jika muat akan mengisi ruang */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* --- Kartu Navigasi (index.html) --- */
+.nav-card {
+  display: block;
+  text-decoration: none;
+  color: var(--text-color);
+  background-color: var(--surface-bg);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow-color);
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.15s ease-out;
+}
+
+.nav-card:hover,
+.nav-card:focus-visible {
+  transform: translate(-5px, -5px);
+  box-shadow: calc(var(--shadow-offset) + 5px) calc(var(--shadow-offset) + 5px)
+    0 var(--shadow-color);
+  background-color: var(--accent-bg);
+  outline: none;
+}
+
+.nav-card:active {
+  transform: translate(0, 0);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow-color);
+}
+
+.nav-card__icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.nav-card__title {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.nav-card__desc {
+  font-size: 1rem;
+  opacity: var(--disabled-opacity);
+  margin: 0;
+}
+
+/* Modifier untuk kartu yang ingin ditonjolkan */
+.nav-card--highlight {
+  border-color: var(--color-primary);
+}
+.nav-card--highlight:hover {
+  background-color: var(--color-primary);
+  color: var(--surface-bg);
+}
+.nav-card--highlight:hover .nav-card__desc {
+  color: var(--surface-bg);
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrutalistCSS - Component Showcase</title>
+
+    <!-- 1. Impor Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 2. Hubungkan CSS -->
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+
+  <body>
+    <!-- Tombol untuk membuka sidebar di mobile -->
+    <button
+      class="btn sidebar-open-btn"
+      data-toggle-target="#mainSidebar"
+      data-toggle-class="is-open"
+    >
+      MENU
+    </button>
+
+    <div class="layout-wrapper">
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar" id="mainSidebar">
+        <div class="sidebar-header">
+          <h3 class="fs-4">Navigasi</h3>
+        </div>
+        <!-- Ganti <nav> lama dengan yang ini di semua file -->
+        <nav class="sidebar-nav">
+          <a href="index.html">Components Overview</a>
+          <a href="card.html">Card / Panel</a>
+          <a href="button.html">Buttons</a>
+          <a href="form-elements.html">Form Elements</a>
+          <a href="dialog.html">Dialog / Modal</a>
+          <a href="progress-bar.html">Progress Bar</a>
+          <a href="tabel.html" >Data Tables</a>
+          <a href="whats-new.html" class="active">What's New</a>
+        </nav>
+
+        <!-- Toggle Dark Mode utama ada di sini, di bagian bawah sidebar -->
+        <div class="mt-auto">
+          <div class="d-flex align-items-center">
+            <label class="toggle-switch">
+              <input type="checkbox" id="darkModeToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="ml-2">Mode Malam</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ===== KONTEN UTAMA ===== -->
+      <!-- form-elements.html -->
+      <!-- whats-new.html -->
+      <main class="main-content">
+        <div class="container my-5">
+          <header class="mb-5">
+            <h1 class="fs-2">What's New</h1>
+            <p>Catatan rilis dan pembaruan terbaru untuk BrutalistCSS.</p>
+          </header>
+
+          <div class="panel mb-5">
+            <div class="panel-header">
+              <h4 class="panel-title">>> Versi 1.0 - The Foundation</h4>
+            </div>
+            <div class="panel-body">
+              <p><strong>Tanggal Rilis:</strong> [Tanggal Hari Ini]</p>
+              <p>
+                Ini adalah rilis awal dari BrutalistCSS. Fitur utama yang
+                ditambahkan:
+              </p>
+              <ul>
+                <li>
+                  Struktur layout dasar dengan sidebar dan area konten utama.
+                </li>
+                <li>
+                  Fungsionalitas Dark Mode dengan toggle dan penyimpanan
+                  preferensi di localStorage.
+                </li>
+                <li>
+                  Pemisahan dokumentasi komponen ke dalam halaman-halaman
+                  terpisah.
+                </li>
+                <li>
+                  Komponen awal yang telah dibuat: Panel, Button, Form Elements,
+                  Dialog, dan Progress Bar.
+                </li>
+                <li>
+                  Skrip JavaScript ringan untuk fungsionalitas interaktif
+                  (Modal, Toggle).
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- Elemen Modal (ditempatkan di luar container utama) -->
+    <!-- ======================================================= -->
+    <div class="modal" id="demoModal">
+      <div class="modal-dialog">
+        <div class="panel">
+          <div
+            class="panel-header d-flex justify-content-between align-items-center"
+          >
+            <h3 class="panel-title">Konfirmasi Aksi</h3>
+            <button
+              data-modal-close
+              style="
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+              "
+            >
+              ×
+            </button>
+          </div>
+          <div class="panel-body">
+            <p>
+              Apakah Anda yakin ingin melanjutkan? Aksi ini tidak dapat
+              diurungkan.
+            </p>
+            <div class="text-right mt-4">
+              <button class="btn" data-modal-close>Batal</button>
+              <button
+                class="btn"
+                onclick="createBrutalistAlert('Aksi Dikonfirmasi!', 'info'); document.querySelector('#demoModal').classList.remove('is-open');"
+              >
+                Ya, Lanjutkan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Hubungkan JavaScript -->
+    <script src="assets/script.js"></script>
+  </body>
+</html>

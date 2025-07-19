@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrutalistCSS - Component Showcase</title>
+
+    <!-- 1. Impor Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 2. Hubungkan CSS -->
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <!-- Tombol untuk membuka sidebar di mobile -->
+    <button
+      class="btn sidebar-open-btn"
+      data-toggle-target="#mainSidebar"
+      data-toggle-class="is-open"
+    >
+      MENU
+    </button>
+
+    <div class="layout-wrapper">
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar" id="mainSidebar">
+        <div class="sidebar-header">
+          <h3 class="fs-4">Navigasi</h3>
+        </div>
+        <!-- Ganti <nav> lama dengan yang ini di semua file -->
+        <nav class="sidebar-nav">
+          <a href="index.html">Components Overview</a>
+          <a href="card.html">Card / Panel</a>
+          <a href="button.html">Buttons</a>
+          <a href="form-elements.html">Form Elements</a>
+          <a href="dialog.html">Dialog / Modal</a>
+          <a href="progress-bar.html">Progress Bar</a>
+          <a href="tabel.html">Data Tables</a>
+          <a href="whats-new.html">What's New</a>
+        </nav>
+
+        <!-- Toggle Dark Mode utama ada di sini, di bagian bawah sidebar -->
+        <div class="mt-auto">
+          <div class="d-flex align-items-center">
+            <label class="toggle-switch">
+              <input type="checkbox" id="darkModeToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="ml-2">Mode Malam</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ===== KONTEN UTAMA ===== -->
+      <!-- index.html -->
+      <main class="main-content">
+        <div class="container my-5">
+          <header class="main-header mb-5">
+            <h1 class="fs-1 text-glitch-hover">BrutalistCSS_</h1>
+            <p class="fs-5">
+              A no-nonsense, lightweight, and opinionated CSS framework.
+            </p>
+            <p>
+              Select a component below to see examples and usage guidelines.
+            </p>
+          </header>
+
+          <!-- [REVISI] Menggunakan CSS Grid yang responsif -->
+          <div class="nav-grid">
+            <!-- Card / Panel -->
+            <a href="card.html" class="nav-card">
+              <div class="nav-card__icon">[■]</div>
+              <h3 class="nav-card__title">Card / Panel</h3>
+              <p class="nav-card__desc">
+                The basic container for content blocks.
+              </p>
+            </a>
+
+            <!-- Buttons -->
+            <a href="button.html" class="nav-card">
+              <div class="nav-card__icon">[BTN]</div>
+              <h3 class="nav-card__title">Buttons</h3>
+              <p class="nav-card__desc">Standard, colored, and icon buttons.</p>
+            </a>
+
+            <!-- Form Elements -->
+            <a href="form-elements.html" class="nav-card">
+              <div class="nav-card__icon">[/ >_]</div>
+              <h3 class="nav-card__title">Form Elements</h3>
+              <p class="nav-card__desc">
+                Inputs, selects, checkboxes, and toggles.
+              </p>
+            </a>
+
+            <!-- Dialog / Modal -->
+            <a href="dialog.html" class="nav-card">
+              <div class="nav-card__icon">[□-□]</div>
+              <h3 class="nav-card__title">Dialog / Modal</h3>
+              <p class="nav-card__desc">Interactive pop-up windows.</p>
+            </a>
+
+            <!-- Progress Bar -->
+            <a href="progress-bar.html" class="nav-card">
+              <div class="nav-card__icon">[■■■□□]</div>
+              <h3 class="nav-card__title">Progress Bar</h3>
+              <p class="nav-card__desc">
+                Visual indicators for loading or steps.
+              </p>
+            </a>
+
+            <!-- Data Tables -->
+            <a href="tabel.html" class="nav-card">
+              <div class="nav-card__icon">[#|==]</div>
+              <h3 class="nav-card__title">Data Tables</h3>
+              <p class="nav-card__desc">Sortable and searchable data grids.</p>
+            </a>
+
+            <!-- What's New -->
+            <a href="whats-new.html" class="nav-card nav-card--highlight">
+              <div class="nav-card__icon">[★]</div>
+              <h3 class="nav-card__title">What's New</h3>
+              <p class="nav-card__desc">Check out the latest updates.</p>
+            </a>
+          </div>
+          <!-- Akhir dari .nav-grid -->
+        </div>
+      </main>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- Elemen Modal (ditempatkan di luar container utama) -->
+    <!-- ======================================================= -->
+    <div class="modal" id="demoModal">
+      <div class="modal-dialog">
+        <div class="panel">
+          <div
+            class="panel-header d-flex justify-content-between align-items-center"
+          >
+            <h3 class="panel-title">Konfirmasi Aksi</h3>
+            <button
+              data-modal-close
+              style="
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+              "
+            >
+              ×
+            </button>
+          </div>
+          <div class="panel-body">
+            <p>
+              Apakah Anda yakin ingin melanjutkan? Aksi ini tidak dapat
+              diurungkan.
+            </p>
+            <div class="text-right mt-4">
+              <button class="btn" data-modal-close>Batal</button>
+              <button
+                class="btn"
+                onclick="createBrutalistAlert('Aksi Dikonfirmasi!', 'info'); document.querySelector('#demoModal').classList.remove('is-open');"
+              >
+                Ya, Lanjutkan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Hubungkan JavaScript -->
+    <script src="assets/script.js"></script>
+  </body>
+</html>

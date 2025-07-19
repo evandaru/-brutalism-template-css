@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrutalistCSS - Component Showcase</title>
+
+    <!-- 1. Impor Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 2. Hubungkan CSS -->
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+
+  <body>
+    <!-- Tombol untuk membuka sidebar di mobile -->
+    <button
+      class="btn sidebar-open-btn"
+      data-toggle-target="#mainSidebar"
+      data-toggle-class="is-open"
+    >
+      MENU
+    </button>
+
+    <div class="layout-wrapper">
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar" id="mainSidebar">
+        <div class="sidebar-header">
+          <h3 class="fs-4">Navigasi</h3>
+        </div>
+        <!-- Ganti <nav> lama dengan yang ini di semua file -->
+        <nav class="sidebar-nav">
+          <a href="index.html">Components Overview</a>
+          <a href="card.html">Card / Panel</a>
+          <a href="button.html">Buttons</a>
+          <a href="form-elements.html">Form Elements</a>
+          <a href="dialog.html" class="active">Dialog / Modal</a>
+          <a href="progress-bar.html">Progress Bar</a>
+          <a href="tabel.html">Data Tables</a>
+          <a href="whats-new.html">What's New</a>
+        </nav>
+
+        <!-- Toggle Dark Mode utama ada di sini, di bagian bawah sidebar -->
+        <div class="mt-auto">
+          <div class="d-flex align-items-center">
+            <label class="toggle-switch">
+              <input type="checkbox" id="darkModeToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="ml-2">Mode Malam</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ===== KONTEN UTAMA ===== -->
+      <main class="main-content">
+        <div class="container my-5">
+          <header class="mb-5">
+            <h1 class="fs-2">Dialog / Modal Showcase</h1>
+            <p>
+              Berbagai contoh interaktif untuk menampilkan konten dalam lapisan
+              di atas halaman.
+            </p>
+          </header>
+
+          <!-- Showcase Pemicu Modal Interaktif -->
+          <section class="panel">
+            <div class="panel-header">
+              <h4 class="panel-title">
+                >> Klik Tombol untuk Mencoba Setiap Variasi
+              </h4>
+            </div>
+            <div class="panel-body">
+              <p>
+                Setiap tombol di bawah ini akan membuka jenis modal yang
+                berbeda, menunjukkan berbagai kemungkinan penggunaan dan gaya.
+              </p>
+              <div class="button-group mt-4">
+                <!-- Tombol-tombol ini adalah fokus utama dari halaman ini -->
+                <button class="btn" data-modal-target="#modal-standard">
+                  Dialog Standar
+                </button>
+                <button class="btn" data-modal-target="#modal-large">
+                  Dialog Besar (Large)
+                </button>
+                <button class="btn" data-modal-target="#modal-scroll">
+                  Dialog Scrollable
+                </button>
+                <button class="btn" data-modal-target="#modal-form">
+                  Dialog dengan Form
+                </button>
+                <button class="btn" data-modal-target="#modal-top">
+                  Notifikasi dari Atas
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <!-- Akhir dari .layout-wrapper -->
+
+    <!-- ======================================================= -->
+    <!-- KOLEKSI MODAL (Letakkan semua di sini, di akhir body) -->
+    <!-- ======================================================= -->
+
+    <div class="modal" id="modal-standard">
+      <div class="modal-dialog">
+        <div class="panel">
+          <div class="panel-header">
+            <h3 class="panel-title">Konfirmasi Aksi</h3>
+            <button class="btn-close" data-modal-close aria-label="Tutup">
+              ×
+            </button>
+          </div>
+          <div class="panel-body">
+            <p>
+              Apakah Anda yakin ingin melanjutkan? Aksi ini tidak dapat
+              diurungkan.
+            </p>
+          </div>
+          <div class="panel-footer d-flex justify-content-between">
+            <button class="btn" data-modal-close>Batal</button>
+            <button
+              class="btn btn--primary btn--filled"
+              data-modal-close
+              onclick="createBrutalistAlert('Aksi Dikonfirmasi!', 'success');"
+            >
+              Ya, Lanjutkan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Modal Besar (Large) -->
+    <div class="modal" id="modal-large">
+      <div class="modal-dialog modal-dialog--lg">
+        <div class="panel">
+          <div class="panel-header">
+            <h3 class="panel-title">Detail Informasi Produk</h3>
+            <button class="btn-close" data-modal-close aria-label="Tutup">
+              ×
+            </button>
+          </div>
+          <div class="panel-body">
+            <p>
+              Gunakan <code>.modal-dialog--lg</code> untuk konten yang lebih
+              lebar, seperti menampilkan detail data atau gambar yang lebih
+              besar.
+            </p>
+            <img
+              src="https://placehold.co/800x200"
+              alt="Placeholder"
+              style="width: 100%; margin-top: 1rem"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Modal Scrollable -->
+    <div class="modal" id="modal-scroll">
+      <div class="modal-dialog">
+        <div class="panel">
+          <div class="panel-header">
+            <h3 class="panel-title">Syarat dan Ketentuan</h3>
+            <button class="btn-close" data-modal-close aria-label="Tutup">
+              ×
+            </button>
+          </div>
+          <div class="panel-body modal-body--scrollable">
+            <p>
+              Ini adalah contoh konten yang sangat panjang. Dengan kelas
+              <code>.modal-body--scrollable</code>, hanya area ini yang akan
+              memiliki scrollbar, bukan seluruh halaman.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+              risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing
+              nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas
+              ligula massa, varius a, semper congue, euismod non, mi. Proin
+              porttitor, orci nec nonummy molestie, enim est eleifend mi, non
+              fermentum diam nisl sit amet erat.
+            </p>
+            <p>
+              Duis semper. Duis arcu massa, scelerisque vitae, consequat in,
+              pretium a, enim. Pellentesque congue. Ut in risus volutpat libero
+              pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas
+              leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui
+              ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus
+              orci luctus et ultrices posuere cubilia Curae; Aliquam nibh.
+            </p>
+            <p>
+              Mauris ac mauris sed pede pellentesque fermentum. Maecenas
+              adipiscing ante non diam. Sorbi in justo. Cum sociis natoque
+              penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+              In magna. Sed et turpis. Integer justo. Sed quis lacus. Nam nulla.
+              Curabitur vel justo. Vivamus ut turpis. Proin quam. Vivamus
+              egestas. Nunc tempor. Mauris ac felis. Ut nec est.
+            </p>
+          </div>
+          <div class="panel-footer">
+            <button class="btn btn-block" data-modal-close>
+              Saya Mengerti dan Setuju
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Modal dengan Form -->
+    <div class="modal" id="modal-form">
+      <div class="modal-dialog modal-dialog--sm">
+        <div class="panel">
+          <div class="panel-header">
+            <h3 class="panel-title">USER LOGIN</h3>
+            <button class="btn-close" data-modal-close aria-label="Tutup">
+              ×
+            </button>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="modal-username" class="form-label">Username:</label>
+              <input
+                type="text"
+                id="modal-username"
+                class="form-control"
+                placeholder="user_id"
+              />
+            </div>
+            <div class="form-group">
+              <label for="modal-password" class="form-label">Password:</label>
+              <input
+                type="password"
+                id="modal-password"
+                class="form-control"
+                placeholder="********"
+              />
+            </div>
+          </div>
+          <div class="panel-footer">
+            <button class="btn btn-block" data-modal-close>LOGIN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Modal dari Atas -->
+    <div class="modal modal--from-top" id="modal-top">
+      <div class="modal-dialog modal-dialog--sm">
+        <div class="panel">
+          <div
+            class="panel-body d-flex justify-content-between align-items-center"
+          >
+            <span>Pembaruan sistem akan dilakukan malam ini.</span>
+            <button class="btn" data-modal-close>OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- Elemen Modal (ditempatkan di luar container utama) -->
+    <!-- ======================================================= -->
+    <div class="modal" id="demoModal">
+      <div class="modal-dialog">
+        <div class="panel">
+          <div
+            class="panel-header d-flex justify-content-between align-items-center"
+          >
+            <h3 class="panel-title">Konfirmasi Aksi</h3>
+            <button
+              data-modal-close
+              style="
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+              "
+            >
+              ×
+            </button>
+          </div>
+          <div class="panel-body">
+            <p>
+              Apakah Anda yakin ingin melanjutkan? Aksi ini tidak dapat
+              diurungkan.
+            </p>
+            <div class="text-right mt-4">
+              <button class="btn" data-modal-close>Batal</button>
+              <button
+                class="btn"
+                onclick="createBrutalistAlert('Aksi Dikonfirmasi!', 'info'); document.querySelector('#demoModal').classList.remove('is-open');"
+              >
+                Ya, Lanjutkan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Hubungkan JavaScript -->
+    <script src="assets/script.js"></script>
+  </body>
+</html>

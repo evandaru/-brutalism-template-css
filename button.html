@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrutalistCSS - Component Showcase</title>
+
+    <!-- 1. Impor Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 2. Hubungkan CSS -->
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+
+  <body>
+    <!-- Tombol untuk membuka sidebar di mobile (dengan ARIA attributes) -->
+    <button
+      class="btn sidebar-open-btn"
+      data-toggle-target="#mainSidebar"
+      data-toggle-class="is-open"
+      aria-controls="mainSidebar"
+      aria-expanded="false"
+    >
+      MENU
+    </button>
+
+    <div class="layout-wrapper">
+      <!-- ===== SIDEBAR (Tetap sama) ===== -->
+      <aside class="sidebar" id="mainSidebar">
+        <div class="sidebar-header">
+          <h3 class="fs-4">Navigasi</h3>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="index.html">Components Overview</a>
+          <a href="card.html">Card / Panel</a>
+          <a href="button.html" class="active">Buttons</a>
+          <a href="form-elements.html">Form Elements</a>
+          <a href="dialog.html">Dialog / Modal</a>
+          <a href="progress-bar.html">Progress Bar</a>
+          <a href="tabel.html">Data Tables</a>
+          <a href="whats-new.html">What's New</a>
+        </nav>
+        <div class="mt-auto">
+          <div class="d-flex align-items-center">
+            <label class="toggle-switch">
+              <input type="checkbox" id="darkModeToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="ml-2">Mode Malam</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ===== KONTEN UTAMA ===== -->
+      <main class="main-content">
+        <div class="container my-5">
+          <header class="mb-5">
+            <h1 class="fs-2">Buttons Showcase</h1>
+            <p>
+              Berbagai variasi tombol dengan kelas <code>.btn</code> dan
+              modifier-nya.
+            </p>
+          </header>
+
+          <!-- 1. Tombol Dasar -->
+          <section class="panel mb-5" aria-labelledby="btn-basic-title">
+            <div class="panel-header">
+              <h4 class="panel-title" id="btn-basic-title">1. Tombol Dasar</h4>
+            </div>
+            <div class="panel-body">
+              <p>
+                Interaksi fundamental. Termasuk link, button, dan state
+                disabled.
+              </p>
+              <div class="button-group">
+                <a href="#" class="btn">Link as Button</a>
+                <button class="btn">Button</button>
+                <button class="btn" disabled>Disabled</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. Tombol Berwarna -->
+          <section class="panel mb-5" aria-labelledby="btn-colored-title">
+            <div class="panel-header">
+              <h4 class="panel-title" id="btn-colored-title">
+                2. Tombol Berwarna (Contextual)
+              </h4>
+            </div>
+            <div class="panel-body">
+              <p>
+                Gunakan modifier <code>.btn--[color]</code> untuk memberikan
+                konteks.
+              </p>
+              <div class="button-group">
+                <button class="btn btn--primary">Primary</button>
+                <button class="btn btn--success">Success</button>
+                <button class="btn btn--danger">Danger</button>
+                <button class="btn btn--warning">Warning</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. Tombol Terisi (Filled) -->
+          <section class="panel mb-5" aria-labelledby="btn-filled-title">
+            <div class="panel-header">
+              <h4 class="panel-title" id="btn-filled-title">
+                3. Tombol Terisi (Filled)
+              </h4>
+            </div>
+            <div class="panel-body">
+              <p>
+                Tambahkan <code>.btn--filled</code> untuk penekanan visual yang
+                lebih kuat.
+              </p>
+              <div class="button-group">
+                <button class="btn btn--filled">Standard Filled</button>
+                <button class="btn btn--filled btn--success">
+                  Success Filled
+                </button>
+                <button class="btn btn--filled btn--danger">
+                  Danger Filled
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. Tombol dengan Ikon -->
+          <section class="panel mb-5" aria-labelledby="btn-icon-title">
+            <div class="panel-header">
+              <h4 class="panel-title" id="btn-icon-title">
+                4. Tombol dengan Ikon
+              </h4>
+            </div>
+            <div class="panel-body">
+              <p>Menggabungkan ikon SVG dan teks untuk kejelasan.</p>
+              <div class="button-group">
+                <button class="btn btn--icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+                    />
+                    <path
+                      d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"
+                    />
+                  </svg>
+                  <span>Upload File</span>
+                </button>
+                <button class="btn btn--danger" aria-label="Hapus">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- 5. Tombol Efek & Blok -->
+          <section class="panel mb-5" aria-labelledby="btn-fx-title">
+            <div class="panel-header">
+              <h4 class="panel-title" id="btn-fx-title">
+                5. Tombol Efek & Blok
+              </h4>
+            </div>
+            <div class="panel-body">
+              <p>
+                Gunakan <code>.text-glitch-hover</code> untuk efek unik dan
+                <code>.btn-block</code> untuk lebar penuh.
+              </p>
+              <button class="btn text-glitch-hover mb-3">
+                Glitch on Hover
+              </button>
+              <button class="btn btn-block">Tombol Blok Penuh</button>
+            </div>
+          </section>
+
+          <!-- 6. Grup Tombol (Toggle) -->
+          <section class="panel mb-5" aria-labelledby="btn-group-title">
+            <div class="panel-header">
+              <h4 class="panel-title" id="btn-group-title">
+                6. Grup Tombol (Toggle)
+              </h4>
+            </div>
+            <div class="panel-body">
+              <p>
+                Gunakan JavaScript untuk menambahkan kelas
+                <code>.is-active</code>.
+              </p>
+              <div class="button-group" id="toggleGroup">
+                <button class="btn is-active">Pilihan A</button>
+                <button class="btn">Pilihan B</button>
+                <button class="btn">Pilihan C</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- ===== MODAL ===== -->
+    <div class="modal" id="demoModal">
+      <div class="modal-dialog">
+        <div class="panel">
+          <div
+            class="panel-header d-flex justify-content-between align-items-center"
+          >
+            <h3 class="panel-title">Konfirmasi Aksi</h3>
+            <!-- Tombol close sekarang menggunakan kelas, bukan inline style -->
+            <button class="btn-close" data-modal-close aria-label="Tutup modal">
+              ×
+            </button>
+          </div>
+          <div class="panel-body">
+            <p>
+              Apakah Anda yakin ingin melanjutkan? Aksi ini tidak dapat
+              diurungkan.
+            </p>
+          </div>
+          <div class="panel-footer d-flex justify-content-between">
+            <button class="btn" data-modal-close>Batal</button>
+            <button
+              class="btn btn--primary btn--filled"
+              onclick="createBrutalistAlert('Aksi Dikonfirmasi!', 'info'); document.querySelector('#demoModal').classList.remove('is-open');"
+            >
+              Ya, Lanjutkan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Hubungkan JavaScript -->
+    <script src="assets/script.js"></script>
+  </body>
+</html>

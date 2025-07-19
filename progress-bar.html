@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrutalistCSS - Component Showcase</title>
+
+    <!-- 1. Impor Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 2. Hubungkan CSS -->
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+
+  <body>
+    <!-- Tombol untuk membuka sidebar di mobile -->
+    <button
+      class="btn sidebar-open-btn"
+      data-toggle-target="#mainSidebar"
+      data-toggle-class="is-open"
+    >
+      MENU
+    </button>
+
+    <div class="layout-wrapper">
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar" id="mainSidebar">
+        <div class="sidebar-header">
+          <h3 class="fs-4">Navigasi</h3>
+        </div>
+        <!-- Ganti <nav> lama dengan yang ini di semua file -->
+        <nav class="sidebar-nav">
+          <a href="index.html">Components Overview</a>
+          <a href="card.html">Card / Panel</a>
+          <a href="button.html">Buttons</a>
+          <a href="form-elements.html">Form Elements</a>
+          <a href="dialog.html">Dialog / Modal</a>
+          <a href="progress-bar.html" class="active">Progress Bar</a>
+          <a href="tabel.html">Data Tables</a>
+          <a href="whats-new.html">What's New</a>
+        </nav>
+
+        <!-- Toggle Dark Mode utama ada di sini, di bagian bawah sidebar -->
+        <div class="mt-auto">
+          <div class="d-flex align-items-center">
+            <label class="toggle-switch">
+              <input type="checkbox" id="darkModeToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="ml-2">Mode Malam</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <div class="container my-5">
+          <header class="mb-5">
+            <h1 class="fs-2">Progress Bar Showcase</h1>
+            <p>
+              Berbagai cara untuk menampilkan kemajuan dari sebuah proses atau
+              operasi.
+            </p>
+          </header>
+
+          <!-- 1. Basic & Colored -->
+          <section class="panel mb-5" aria-labelledby="pb-basic-title">
+            <div class="panel-header">
+              <h4 class="panel-title" id="pb-basic-title">
+                1. Basic & Colored Bars
+              </h4>
+            </div>
+            <div
+              class="panel-body"
+              style="flex-direction: column; align-items: stretch"
+            >
+              <label class="form-label">Default (75%)</label>
+              <div
+                class="progress-bar"
+                role="progressbar"
+                aria-valuenow="75"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div class="progress-bar-inner" style="width: 75%">75%</div>
+              </div>
+
+              <label class="form-label mt-4">Success (100%)</label>
+              <div
+                class="progress-bar progress-bar--success"
+                role="progressbar"
+                aria-valuenow="100"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div class="progress-bar-inner" style="width: 100%">
+                  COMPLETE
+                </div>
+              </div>
+
+              <label class="form-label mt-4">Warning (50%)</label>
+              <div
+                class="progress-bar progress-bar--warning"
+                role="progressbar"
+                aria-valuenow="50"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div class="progress-bar-inner" style="width: 50%">50%</div>
+              </div>
+
+              <label class="form-label mt-4">Danger (25%)</label>
+              <div
+                class="progress-bar progress-bar--danger"
+                role="progressbar"
+                aria-valuenow="25"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div class="progress-bar-inner" style="width: 25%">25%</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. Striped & Animated -->
+          <section class="panel mb-5" aria-labelledby="pb-animated-title">
+            <div class="panel-header">
+              <h4 class="panel-title" id="pb-animated-title">
+                2. Striped & Animated Bars
+              </h4>
+            </div>
+            <div
+              class="panel-body"
+              style="flex-direction: column; align-items: stretch"
+            >
+              <p>
+                Gunakan <code>.progress-bar--striped</code> dan
+                <code>.progress-bar--animated</code> untuk efek visual.
+              </p>
+              <div id="animated-progress-group">
+                <label class="form-label mt-3">Striped (60%)</label>
+                <div
+                  class="progress-bar progress-bar--striped"
+                  role="progressbar"
+                  aria-valuenow="60"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  <div
+                    class="progress-bar-inner"
+                    data-value="60"
+                    style="width: 10%"
+                  >
+                    Processing...
+                  </div>
+                </div>
+
+                <label class="form-label mt-4">Animated Striped (80%)</label>
+                <div
+                  class="progress-bar progress-bar--striped progress-bar--animated"
+                  role="progressbar"
+                  aria-valuenow="80"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  <div
+                    class="progress-bar-inner"
+                    data-value="80"
+                    style="width: 10%"
+                  >
+                    Uploading...
+                  </div>
+                </div>
+              </div>
+              <button
+                class="btn mt-4"
+                id="animate-btn"
+                style="align-self: flex-start"
+              >
+                Animate Progress
+              </button>
+            </div>
+          </section>
+
+          <!-- 3. Sizing & Indeterminate -->
+          <section class="panel mb-5" aria-labelledby="pb-sizing-title">
+            <div class="panel-header">
+              <h4 class="panel-title" id="pb-sizing-title">
+                3. Sizing & Indeterminate State
+              </h4>
+            </div>
+            <div
+              class="panel-body"
+              style="flex-direction: column; align-items: stretch"
+            >
+              <label class="form-label"
+                >Small (<code>.progress-bar--sm</code>)</label
+              >
+              <div class="progress-bar progress-bar--sm">
+                <div class="progress-bar-inner" style="width: 40%"></div>
+              </div>
+
+              <label class="form-label mt-4">Default</label>
+              <div class="progress-bar">
+                <div class="progress-bar-inner" style="width: 60%"></div>
+              </div>
+
+              <label class="form-label mt-4"
+                >Large (<code>.progress-bar--lg</code>)</label
+              >
+              <div class="progress-bar progress-bar--lg">
+                <div class="progress-bar-inner" style="width: 80%"></div>
+              </div>
+
+              <label class="form-label mt-4">Indeterminate (Loading...)</label>
+              <div class="progress-bar progress-bar--indeterminate">
+                <div class="progress-bar-inner"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- Elemen Modal (ditempatkan di luar container utama) -->
+    <!-- ======================================================= -->
+    <div class="modal" id="demoModal">
+      <div class="modal-dialog">
+        <div class="panel">
+          <div
+            class="panel-header d-flex justify-content-between align-items-center"
+          >
+            <h3 class="panel-title">Konfirmasi Aksi</h3>
+            <button
+              data-modal-close
+              style="
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+              "
+            >
+              ×
+            </button>
+          </div>
+          <div class="panel-body">
+            <p>
+              Apakah Anda yakin ingin melanjutkan? Aksi ini tidak dapat
+              diurungkan.
+            </p>
+            <div class="text-right mt-4">
+              <button class="btn" data-modal-close>Batal</button>
+              <button
+                class="btn"
+                onclick="createBrutalistAlert('Aksi Dikonfirmasi!', 'info'); document.querySelector('#demoModal').classList.remove('is-open');"
+              >
+                Ya, Lanjutkan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Hubungkan JavaScript -->
+    <script src="assets/script.js"></script>
+  </body>
+</html>

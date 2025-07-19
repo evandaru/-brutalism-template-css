@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrutalistCSS - Card / Panel (Responsive)</title>
+
+    <!-- 1. Impor Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 2. Hubungkan CSS -->
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <!-- Tombol untuk membuka sidebar di mobile, dengan penambahan ARIA attributes -->
+    <button
+      class="btn sidebar-open-btn"
+      data-toggle-target="#mainSidebar"
+      data-toggle-class="is-open"
+      aria-controls="mainSidebar"
+      aria-expanded="false"
+    >
+      MENU
+    </button>
+
+    <div class="layout-wrapper">
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar" id="mainSidebar">
+        <div class="sidebar-header">
+          <h3 class="fs-4">Navigasi</h3>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="index.html">Components Overview</a>
+          <a href="card.html" class="active">Card / Panel</a>
+          <a href="button.html">Buttons</a>
+          <a href="form-elements.html">Form Elements</a>
+          <a href="dialog.html">Dialog / Modal</a>
+          <a href="progress-bar.html">Progress Bar</a>
+          <a href="tabel.html">Data Tables</a>
+          <a href="whats-new.html">What's New</a>
+        </nav>
+        <div class="mt-auto">
+          <div class="d-flex align-items-center">
+            <label class="toggle-switch">
+              <input type="checkbox" id="darkModeToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="ml-2">Mode Malam</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ===== KONTEN UTAMA ===== -->
+      <main class="main-content">
+        <div class="container my-5">
+          <header class="mb-5">
+            <h1 class="fs-2">Variasi Card / Panel</h1>
+            <p>
+              Contoh penggunaan komponen <code>.panel</code> dalam berbagai
+              skenario, kini sepenuhnya responsif.
+            </p>
+          </header>
+
+          <!-- Grid yang sudah responsif. Tidak perlu lagi kelas .col-* -->
+          <div class="row">
+            <!-- 1. Panel Standar dengan Header -->
+            <div class="panel">
+              <div class="panel-header">
+                <h4 class="panel-title">Panel Standar</h4>
+              </div>
+              <div class="panel-body">
+                <p>
+                  Ini adalah panel paling dasar dengan judul dan area konten.
+                  Cocok untuk menampilkan informasi umum.
+                </p>
+              </div>
+            </div>
+
+            <!-- 2. Panel Aksi dengan Footer -->
+            <div class="panel">
+              <div class="panel-header">
+                <h4 class="panel-title">Simpan Perubahan?</h4>
+              </div>
+              <div class="panel-body">
+                <p>
+                  File konfigurasi Anda telah diubah. Simpan perubahan sebelum
+                  keluar?
+                </p>
+              </div>
+              <div class="panel-footer d-flex justify-content-between">
+                <button class="btn">Batal</button>
+                <button class="btn">Simpan</button>
+              </div>
+            </div>
+
+            <!-- 3. Panel Login Form -->
+            <div class="panel">
+              <div class="panel-header">
+                <h4 class="panel-title">USER LOGIN</h4>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <!-- Label terhubung ke input via 'for' dan 'id' -->
+                  <label for="username" class="form-label">Username:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    class="form-control"
+                    placeholder="user_id"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="password" class="form-label">Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    class="form-control"
+                    placeholder="********"
+                  />
+                </div>
+                <button class="btn btn-block mt-4">LOGIN</button>
+              </div>
+            </div>
+
+            <!-- 4. Panel Daftar Item (List Group) -->
+            <div class="panel">
+              <div class="panel-header">
+                <h4 class="panel-title">Daftar Tugas</h4>
+              </div>
+              <div class="panel-body p-0">
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-action active">
+                    Selesaikan dokumentasi
+                  </li>
+                  <li class="list-group-item list-group-item-action">
+                    Desain halaman baru
+                  </li>
+                  <li class="list-group-item list-group-item-action disabled">
+                    Deploy ke server
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 5. Panel Gambar dengan Teks -->
+            <div class="panel">
+              <!-- Inline style dihapus, diganti dengan class .panel-img -->
+              <img
+                src="https://placehold.co/600x400"
+                alt="Gambar Abstrak"
+                class="panel-img"
+              />
+              <div class="panel-body">
+                <h5 class="fs-5">Judul Artikel</h5>
+                <p class="text-muted">
+                  Ini adalah deskripsi singkat dari gambar di atas. Cocok untuk
+                  kartu blog atau produk.
+                </p>
+                <a href="#" class="link-primary">Baca lebih lanjut...</a>
+              </div>
+            </div>
+
+            <!-- 6. Panel Notifikasi/Alert di Dalam Panel -->
+            <div class="panel">
+              <div class="panel-header">
+                <h4 class="panel-title">Status Sistem</h4>
+              </div>
+              <div class="panel-body">
+                <div class="alert alert-success">
+                  <strong>OK:</strong> Semua sistem berjalan normal.
+                </div>
+                <div class="alert alert-warning mt-3">
+                  <strong>WARN:</strong> Penggunaan disk 85%.
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Akhir dari .row -->
+        </div>
+      </main>
+    </div>
+
+    <!-- (Modal dan Script tetap sama, tidak perlu diubah) -->
+    <div class="modal" id="demoModal">...</div>
+    <script src="assets/script.js"></script>
+  </body>
+</html>
